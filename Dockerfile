@@ -24,20 +24,20 @@ ARG UID=1000
 RUN \
   apk --no-cache upgrade && \
   apk add --no-cache curl && \
-  curl --fail --location --silent --show-error "https://download.gocd.org/binaries/19.8.0-9915/generic/go-agent-19.8.0-9915.zip" > /tmp/go-agent-19.8.0-9915.zip
+  curl --fail --location --silent --show-error "https://download.gocd.org/binaries/19.9.0-10194/generic/go-agent-19.9.0-10194.zip" > /tmp/go-agent-19.9.0-10194.zip
 
-RUN unzip /tmp/go-agent-19.8.0-9915.zip -d /
-RUN mv /go-agent-19.8.0 /go-agent && chown -R ${UID}:0 /go-agent && chmod -R g=u /go-agent
+RUN unzip /tmp/go-agent-19.9.0-10194.zip -d /
+RUN mv /go-agent-19.9.0 /go-agent && chown -R ${UID}:0 /go-agent && chmod -R g=u /go-agent
 
 FROM centos:7
 MAINTAINER ThoughtWorks, Inc. <support@thoughtworks.com>
 
-LABEL gocd.version="19.8.0" \
+LABEL gocd.version="19.9.0" \
   description="GoCD agent based on centos version 7" \
   maintainer="ThoughtWorks, Inc. <support@thoughtworks.com>" \
   url="https://www.gocd.org" \
-  gocd.full.version="19.8.0-9915" \
-  gocd.git.sha="9ea99a72c338a132ae1ca83f363e16b2c95d920b"
+  gocd.full.version="19.9.0-10194" \
+  gocd.git.sha="34fca8f7682a65ef5fbd6726d51fd52b0c041bc6"
 
 ADD https://github.com/krallin/tini/releases/download/v0.18.0/tini-static-amd64 /usr/local/sbin/tini
 
@@ -46,8 +46,8 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 ENV GO_JAVA_HOME="/gocd-jre"
-ENV BASH_ENV="/opt/rh/rh-git29/enable"
-ENV ENV="/opt/rh/rh-git29/enable"
+ENV BASH_ENV="/opt/rh/rh-git218/enable"
+ENV ENV="/opt/rh/rh-git218/enable"
 
 ARG UID=1000
 ARG GID=1000
@@ -62,8 +62,8 @@ RUN \
   useradd -u ${UID} -g root -d /home/go -m go && \
   yum update -y && \
   yum install --assumeyes centos-release-scl && \
-  yum install --assumeyes rh-git29 mercurial subversion openssh-clients bash unzip curl procps sysvinit-tools coreutils && \
-  cp /opt/rh/rh-git29/enable /etc/profile.d/rh-git29.sh && \
+  yum install --assumeyes rh-git218 mercurial subversion openssh-clients bash unzip curl procps sysvinit-tools coreutils && \
+  cp /opt/rh/rh-git218/enable /etc/profile.d/rh-git218.sh && \
   yum clean all && \
   curl --fail --location --silent --show-error 'https://github.com/AdoptOpenJDK/openjdk12-binaries/releases/download/jdk-12.0.1%2B12/OpenJDK12U-jre_x64_linux_hotspot_12.0.1_12.tar.gz' --output /tmp/jre.tar.gz && \
   mkdir -p /gocd-jre && \
