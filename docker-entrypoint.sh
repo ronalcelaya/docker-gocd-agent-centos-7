@@ -67,7 +67,7 @@ fi
 
 if [ "$1" = "${AGENT_WORK_DIR}/bin/go-agent" ]; then
 
-  [ -z "${VOLUME_DIR}" ] && VOLUME_DIR="/godata"
+  [ -z "${VOLUME_DIR}" ] && VOLUME_DIR="/var/lib/go-agent"
 
   agent_data_dirs=(config logs pipelines)
 
