@@ -69,7 +69,7 @@ RUN \
   mkdir -p /gocd-jre && \
   tar -xf /tmp/jre.tar.gz -C /gocd-jre --strip 1 && \
   rm -rf /tmp/jre.tar.gz && \
-  mkdir -p /go-agent /docker-entrypoint.d /go /godata
+  mkdir -p /go-agent /docker-entrypoint.d /go /godata /var/lib/go-agent
 
 ADD docker-entrypoint.sh /
 
